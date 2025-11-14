@@ -1,0 +1,315 @@
+🧠 UNIT I – Fundamentals of Deep Learning
+
+1. What is Deep Learning?
+Deep Learning is a part of Machine Learning that uses neural networks with many 
+layers to learn complex patterns automatically.
+
+2. What is a Multilayer Perceptron (MLP)?
+MLP is a fully connected neural network with one or more hidden layers between input and output.
+
+3. What is a Feedforward Neural Network?
+In a feedforward network, data moves only in one direction—from input to output—without loops.
+
+4. What is Backpropagation?
+It’s a training algorithm that updates weights by propagating error backward using gradient descent.
+
+5. What is Gradient Descent?
+A method to minimize loss by adjusting weights in the opposite direction of the gradient.
+
+6. What is the Vanishing Gradient Problem?
+It happens when gradients become very small, slowing or stopping learning in deep layers.
+
+7. What is an Activation Function?
+It adds non-linearity so the network can learn complex patterns.
+
+8. What is ReLU?
+Rectified Linear Unit: outputs zero for negative input and same value for positive input.
+
+9. What is Leaky ReLU (LRELU)?
+It allows a small negative slope instead of zero for negative inputs to avoid dead neurons.
+
+10. What is ELU (Exponential Linear Unit)?
+It smooths negative outputs using an exponential function to improve learning.
+
+11. What are Optimization Algorithms?
+They optimize weight updates—examples: SGD, Adam, RMSProp.
+
+12. What are Hyperparameters?
+Values set before training—like learning rate, layer size, momentum.
+
+13. What is Regularization?
+Techniques to reduce overfitting like dropout, L1, and L2.
+
+14. What is Dropout?
+Randomly turning off neurons during training to prevent overfitting.
+
+15. What is L1 and L2 Regularization?
+L1 uses absolute values of weights; L2 uses squares of weights to reduce model complexity.
+
+
+-----------------------------------------------------------------------------
+
+
+🌀 UNIT II – Convolutional Neural Networks (CNN)
+
+1. What is a CNN?
+CNN is a deep network designed for image data using convolution and pooling layers.
+
+2. What is a Convolution Operation?
+It applies filters over input to extract features like edges or textures.
+
+3. What is Parameter Sharing?
+Same filter (weights) is used across image regions, reducing parameters.
+
+4. What is Equivariant Representation?
+It means the output changes predictably when the input changes (like shifting).
+
+5. What is Pooling?
+It reduces feature map size by taking max or average values (downsampling).
+
+6. What are CNN Variants?
+Different architectures like AlexNet, VGG, ResNet, DenseNet.
+
+7. What is the Basic Architecture of CNN?
+Layers: Convolution → Activation → Pooling → Fully Connected → Output.
+
+8. What is AlexNet?
+A deep CNN with 5 conv layers and 3 fully connected layers that popularized deep learning.
+
+
+-----------------------------------------------------------------------------
+
+
+🔁 UNIT III – Recurrent Neural Networks (RNN)
+
+1. What is an RNN?
+RNNs handle sequential data by using previous outputs as inputs for next steps.
+
+2. Types of RNNs?
+Simple RNN, LSTM, GRU, Bidirectional RNN.
+
+3. Difference between Feedforward and RNN?
+Feedforward has no memory; RNN has memory of previous inputs.
+
+4. What is LSTM?
+Long Short-Term Memory network that solves vanishing gradient problem using gates.
+
+5. What is an Encoder-Decoder Architecture?
+Used in seq-to-seq models like translation—encoder compresses info, decoder outputs sequence.
+
+6. What is a Recursive Neural Network?
+It processes hierarchical data like trees (used in NLP parse trees).
+
+
+
+-----------------------------------------------------------------------------
+
+
+🔒 UNIT IV – Autoencoders
+
+1. What is an Autoencoder?
+A neural network that learns to compress and reconstruct data.
+
+2. What is an Undercomplete Autoencoder?
+It has fewer neurons in the hidden layer than input to force feature learning.
+
+3. What is a Sparse Autoencoder?
+It adds sparsity constraint so only few neurons activate at a time.
+
+4. What is a Denoising Autoencoder?
+It removes noise from data by learning to reconstruct clean input.
+
+5. What is a Contractive Autoencoder?
+It penalizes large changes in encoding to make features robust.
+
+6. Applications of Autoencoders?
+Used in image denoising, feature extraction, and dimensionality reduction.
+
+
+
+-----------------------------------------------------------------------------
+
+
+🧩 UNIT V – Representation Learning
+
+1. What is Representation Learning?
+It automatically learns useful features or representations from raw data.
+
+2. What is Greedy Layerwise Pretraining?
+Training one layer at a time before fine-tuning the whole network.
+
+3. What is Transfer Learning?
+Using a pre-trained model on a new but similar task.
+
+4. What is Domain Adaptation?
+Adapting a model trained on one domain to work on another.
+
+5. What is Distributed Representation?
+Represents features across many neurons instead of one-hot encoding.
+
+6. What is DenseNet?
+A CNN variant where each layer connects to every other layer for better feature reuse.
+
+
+
+-----------------------------------------------------------------------------
+
+
+💡 UNIT VI – Applications of Deep Learning
+
+1. Applications of Deep Learning?
+Used in image recognition, NLP, speech recognition, recommender systems, etc.
+
+2. How DL is used in Image Classification?
+CNNs classify images into categories using learned features.
+
+3. How DL is used in Speech Recognition?
+RNNs or CNNs convert speech to text.
+
+4. How DL helps in NLP?
+Used for translation, text generation, sentiment analysis.
+
+5. What is Social Network Analysis in DL?
+DL models analyze relationships, communities, and user behavior.
+
+6. How DL is used in Recommender Systems?
+DL models learn user preferences to recommend items.
+
+
+
+-----------------------------------------------------------------------------
+
+
+🌀 SGD (Stochastic Gradient Descent)
+
+Q: What is SGD?
+SGD is an optimization algorithm that updates weights using one sample (or mini-batch)
+at a time instead of the whole dataset.
+
+Q: Why is it called “stochastic”?
+Because it uses random samples from the dataset for each update, making learning faster and less memory-heavy.
+
+Q: Advantage of SGD?
+It’s fast and works well with large datasets.
+
+Q: Disadvantage of SGD?
+It can fluctuate or not converge smoothly because of noisy updates.
+
+⚡ Adam (Adaptive Moment Estimation)
+
+Q: What is Adam Optimizer?
+Adam is an advanced optimization algorithm that combines Momentum and RMSProp to adapt the learning rate for each parameter.
+
+Q: How does Adam work?
+It keeps track of both the average of past gradients (momentum) and the average of squared gradients (RMSProp idea).
+
+Q: Why is Adam better than SGD?
+Adam adapts learning rates automatically and converges faster, especially on complex problems.
+
+Q: What are main parameters in Adam?
+
+α (learning rate)
+
+β₁ (momentum term)
+
+β₂ (RMS term)
+
+ε (small constant to avoid divide by zero)
+
+Q: Where is Adam used?
+Used widely in deep learning tasks like CNNs, RNNs, and NLP because it needs less tuning.
+
+
+
+-----------------------------------------------------------------------------
+
+
+
+🧠 AlexNet
+
+Q: What is AlexNet?
+AlexNet is a deep Convolutional Neural Network (CNN) designed for image classification tasks.
+
+Q: Who developed AlexNet?
+It was developed by Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton in 2012.
+
+Q: Why is AlexNet important?
+It popularized deep learning after winning the ImageNet competition (ILSVRC 2012) by a large margin.
+
+Q: What is the architecture of AlexNet?
+It has 8 layers — 5 convolutional layers and 3 fully connected layers.
+
+Q: What activation function is used in AlexNet?
+It uses ReLU (Rectified Linear Unit) for faster training.
+
+Q: What is the input size for AlexNet?
+The network takes 227 × 227 × 3 RGB images as input.
+
+Q: What is the purpose of pooling in AlexNet?
+Pooling reduces the spatial size and computation, using max pooling.
+
+Q: What regularization method is used in AlexNet?
+It uses Dropout to prevent overfitting.
+
+Q: Which optimizer was used in AlexNet?
+AlexNet used Stochastic Gradient Descent (SGD) with momentum.
+
+
+
+
+------------------------------------------------------------------------
+
+
+
+
+🔡 Encoding
+
+Q: What is Encoding in Deep Learning?
+Encoding is the process of converting data (like text or categories) into a numerical form that a neural network can understand.
+
+Q: Why is Encoding needed?
+Because neural networks and ML models work only with numbers, not text or labels.
+
+Q: What are common types of Encoding?
+
+Label Encoding
+
+One-Hot Encoding
+
+Binary Encoding
+
+Word Embeddings
+
+🔠 One-Hot Encoding
+
+Q: What is One-Hot Encoding?
+It converts categorical values into binary vectors where only one bit is “1” and all others are “0”.
+
+Q: Example of One-Hot Encoding?
+If categories = {Cat, Dog, Cow}
+Then:
+
+Cat → [1, 0, 0]
+
+Dog → [0, 1, 0]
+
+Cow → [0, 0, 1]
+
+Q: Why use One-Hot Encoding?
+It avoids giving false numeric relationships between categories (like 1 < 2 < 3).
+
+Q: Limitation of One-Hot Encoding?
+It increases feature size when the number of categories is large.
+
+Q: Where is One-Hot Encoding used?
+Used in text processing, categorical data, and NLP models before embedding layers.
+
+
+
+
+---------------------------------------------------------------------------
+
+
+
+Grayscale images are images that contain only shades of gray (black to white), with intensity 
+values from 0 to 255 instead of color channels (RGB).

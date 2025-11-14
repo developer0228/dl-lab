@@ -1,0 +1,183 @@
+1️⃣ Study of Deep Learning Packages – TensorFlow, Keras, Theano, PyTorch
+
+Q1. What is TensorFlow?
+TensorFlow is an open-source deep learning library by Google used for numerical computation and building neural networks.
+
+Q2. What is Keras?
+Keras is a high-level neural network API that runs on top of TensorFlow, making model building easy and fast.
+
+Q3. What is Theano?
+Theano is a Python library for defining, optimizing, and evaluating mathematical expressions, mainly for deep learning.
+
+Q4. What is PyTorch?
+PyTorch is a flexible, open-source deep learning framework by Facebook that supports dynamic computation graphs.
+
+Q5. Difference between TensorFlow and PyTorch?
+TensorFlow uses static graphs, while PyTorch uses dynamic graphs that change during runtime.
+
+Q6. Why use Keras with TensorFlow?
+Because Keras simplifies TensorFlow code and makes experiments faster and easier.
+
+Q7. Which package is best for research?
+PyTorch, as it’s easier for debugging and experimentation.
+
+
+--------------------------------------------------------------------------------------
+
+2️⃣ Implementing Feedforward Neural Network (Keras & TensorFlow)
+
+Q1. What is a Feedforward Neural Network (FNN)?
+An FNN is a network where information moves only in one direction—from input to output.
+
+Q2. What dataset is commonly used?
+MNIST or CIFAR-10 datasets are used for image classification.
+
+Q3. What is SGD?
+SGD (Stochastic Gradient Descent) is an optimization algorithm that updates weights using random data batches.
+
+Q4. What are activation functions?
+They introduce non-linearity into the network (e.g., ReLU, Sigmoid, Softmax).
+
+Q5. Why do we split data into training and testing sets?
+To evaluate how well the model performs on unseen data.
+
+Q6. What is model evaluation?
+Checking accuracy and loss on the test data to measure performance.
+
+Q7. What does the loss curve show?
+It shows how the model error decreases over training epochs.
+
+
+--------------------------------------------------------------------------------------
+
+3️⃣ Image Classification Model
+
+Q1. What is image classification?
+It’s the process of labeling images into one of the predefined categories.
+
+Q2. What are the main stages of an image classification model?
+Loading data, preprocessing, defining model, training, and evaluating.
+
+Q3. Why do we normalize images?
+To scale pixel values and make training faster and more stable.
+
+Q4. What architecture is commonly used?
+CNN (Convolutional Neural Network) architecture.
+
+Q5. What is the purpose of pooling layers?
+To reduce spatial dimensions and computation.
+
+Q6. What is overfitting?
+When a model performs well on training data but poorly on test data.
+
+Q7. How can overfitting be reduced?
+Using dropout, regularization, or more data.
+
+
+--------------------------------------------------------------------------------------
+
+4️⃣ Autoencoder for Anomaly Detection
+
+Q1. What is an autoencoder?
+An autoencoder is a neural network that learns to compress and then reconstruct data.
+
+Q2. What is an encoder?
+It compresses the input data into a smaller latent representation.
+
+Q3. What is a decoder?
+It reconstructs the original data from the latent representation.
+
+Q4. How is anomaly detection done using an autoencoder?
+By comparing reconstruction error—large errors indicate anomalies.
+
+Q5. What loss function is used in autoencoders?
+Mean Squared Error (MSE) is commonly used.
+
+Q6. Why is autoencoder unsupervised?
+Because it learns patterns without needing labeled data.
+
+Q7. What optimizer is used commonly?
+Adam optimizer, as it converges faster.
+
+
+--------------------------------------------------------------------------------------
+
+
+5️⃣ Continuous Bag of Words (CBOW) Model
+
+Q1. What is CBOW?
+CBOW is a Word2Vec model that predicts a target word from surrounding context words.
+
+Q2. What is the input and output in CBOW?
+Input: Context words, Output: Target word.
+
+Q3. What type of data does CBOW work with?
+Text data converted into numerical word vectors.
+
+Q4. What is embedding?
+It’s the process of converting words into dense vector representations.
+
+Q5. How is CBOW different from Skip-gram?
+CBOW predicts the center word from context, Skip-gram predicts context from the center word.
+
+Q6. Why do we use Word2Vec?
+To represent semantic meaning of words in numerical form.
+
+Q7. What is the loss used in CBOW?
+Negative log likelihood or cross-entropy loss.
+
+
+--------------------------------------------------------------------------------------
+
+
+6️⃣ Object Detection using Transfer Learning (CNN)
+
+Q1. What is transfer learning?
+It’s using a pre-trained model on a new task to save training time and resources.
+
+Q2. Why freeze layers in transfer learning?
+To keep previously learned low-level features unchanged.
+
+Q3. What is a pre-trained model?
+A model already trained on a large dataset like ImageNet.
+
+Q4. Which CNN models are used for transfer learning?
+VGG16, ResNet, Inception, or MobileNet.
+
+Q5. Why add custom classifier layers?
+To adapt the model to a new dataset or new number of classes.
+
+Q6. What is fine-tuning?
+Unfreezing some layers and retraining to improve accuracy on new data.
+
+Q7. What metric is used for object detection?
+Mean Average Precision (mAP) or accuracy.
+
+
+---------------------------------------------------------------------
+
+Predefined Category:
+A predefined category is a fixed label or class that an image or data sample belongs to (e.g., “cat,” “dog,” “car”).
+
+Activation Functions (1 line each):
+
+ReLU (Rectified Linear Unit): Outputs input if positive, else 0 — helps prevent vanishing gradients.
+
+Leaky ReLU (LReLU): Allows a small negative slope for negative inputs to avoid dead neurons.
+
+ELU (Exponential Linear Unit): Smoothly outputs negative values using an exponential curve, improving learning.
+
+Sigmoid: Maps input between 0 and 1 — used for binary classification.
+
+
+
+-------------------------------------------------------------------------
+
+
+
+Epochs:
+An epoch is one full training cycle where the model sees all training samples once.
+
+
+Epochs:
+One epoch means one complete pass of the entire training dataset through the neural network.
