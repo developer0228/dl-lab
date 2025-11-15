@@ -1,0 +1,1540 @@
+✅ Practical 1 — Study of Deep Learning Packages: TensorFlow, Keras, Theano, PyTorch
+Aim:
+
+To study and document distinct features and functionalities of deep learning packages: TensorFlow, Keras, Theano, and PyTorch.
+
+✅ Part 1 — Importing NumPy
+import numpy as np
+
+🔍 Explanation
+
+Imports NumPy, the core Python library for numerical operations and arrays.
+
+⭐ Importance / Aim Achievement
+
+Allows handling matrices and numerical data, which all DL frameworks use internally.
+
+✅ Part 2 — Installing TensorFlow
+!pip install tensorflow    #build, train and deploy ML and DL models using dataflow graphs
+
+🔍 Explanation
+
+!pip install ... runs a terminal command inside Jupyter Notebook.
+
+Installs TensorFlow, a deep learning framework.
+
+⭐ Importance / Aim Achievement
+
+This block installs TensorFlow, fulfilling the requirement to “study TensorFlow.”
+
+✅ Part 3 — Importing Keras Datasets
+from keras import datasets
+
+🔍 Explanation
+
+Keras (a deep learning library) provides easy dataset loaders.
+
+datasets contains MNIST, CIFAR-10, etc.
+
+⭐ Importance / Aim Achievement
+
+Keras is being accessed → demonstrating its ease of use for dataset loading.
+
+✅ Part 4 — Loading MNIST Dataset
+(train_images, train_labels), (test_images, test_labels) = datasets.mnist.load_data()
+
+🔍 Explanation
+
+Loads the MNIST handwritten digit dataset from Keras.
+
+Splits into:
+
+train_images, train_labels
+
+test_images, test_labels
+
+⭐ Importance / Aim Achievement
+
+Shows how easily Keras accesses datasets — part of studying DL packages.
+
+✅ Part 5 — Checking Training Image Shape
+train_images.shape
+
+🔍 Explanation
+
+Prints the shape of training images.
+
+MNIST shape is typically (60000, 28, 28):
+
+60,000 images
+
+each 28×28 pixels
+
+⭐ Importance / Aim Achievement
+
+Understanding dataset dimensions is essential when studying frameworks.
+
+✅ Part 6 — Checking Test Image Shape
+test_images.shape
+
+🔍 Explanation
+
+Prints MNIST test dataset shape.
+
+Usually (10000, 28, 28).
+
+⭐ Importance / Aim Achievement
+
+Further confirms understanding of dataset structure.
+
+✅ Part 7 — Installing Theano
+!pip install Theano    #numerical computation library for python
+
+🔍 Explanation
+
+Installs Theano, a numerical computation library used for symbolic math and GPU acceleration.
+
+⭐ Importance / Aim Achievement
+
+Completes the study requirement for Theano.
+
+✅ Part 8 — Installing PyTorch
+!pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu115
+
+🔍 Explanation
+
+Installs PyTorch (framework) + torchvision (image tools) + torchaudio.
+
+--extra-index-url ensures correct GPU version is downloaded.
+
+⭐ Importance / Aim Achievement
+
+Installs PyTorch package, fulfilling another required framework in the aim.
+
+✅ Part 9 — Importing PyTorch
+import torch
+import torch.nn as nn
+
+🔍 Explanation
+
+Imports core PyTorch library.
+
+Imports nn module → used for neural network layers.
+
+⭐ Importance / Aim Achievement
+
+Demonstrates how PyTorch modules are accessed.
+
+✅ Part 10 — Checking PyTorch Version
+print(torch.__version__)
+
+🔍 Explanation
+
+Prints installed PyTorch version.
+
+Verifies installation.
+
+⭐ Importance / Aim Achievement
+
+Confirms framework installation & environment setup.
+
+✅ Part 11 — Checking GPU Availability
+torch.cuda.is_available()
+
+🔍 Explanation
+
+Returns True if system has CUDA-enabled GPU accessible by PyTorch.
+
+⭐ Importance / Aim Achievement
+
+Shows PyTorch’s GPU support — a key feature of DL frameworks.
+
+🎯 FINAL SUMMARY (SPPU Practical Format)
+
+This practical successfully studies four major deep learning packages:
+
+TensorFlow → deep learning framework supporting large-scale computation
+
+Keras → high-level DL library for easy model building
+
+Theano → symbolic computation library enabling GPU operations
+
+PyTorch → dynamic graph deep learning framework preferred for research
+
+All installation commands, dataset loading operations, shape checks, and version/gpu checks demonstrate the basic 
+usage and functionality of each package — achieving the aim.
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+✅ Practical 2 — Implementing Feedforward Neural Networks with Keras and TensorFlow
+Aim:
+
+To implement a Feedforward Neural Network (FNN) using Keras and TensorFlow for 
+classification on MNIST dataset.
+
+✅ Part 1 — Importing Libraries
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.optimizers import SGD
+import matplotlib.pyplot as plt
+
+🔍 Explanation
+
+tensorflow and keras are imported for building and training the neural network.
+
+Sequential is used to define a linear stack of layers for the neural network.
+
+Dense is a fully connected layer.
+
+Flatten reshapes 2D data into 1D.
+
+SGD is the Stochastic Gradient Descent optimizer.
+
+matplotlib.pyplot is used to plot training results.
+
+⭐ Importance / Aim Achievement
+
+Imports necessary libraries for building, training, and evaluating the neural network.
+
+
+✅ Part 2 — Loading Training and Testing Data (MNIST Dataset)
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+🔍 Explanation
+
+Loads the MNIST dataset from Keras:
+
+(x_train, y_train) → training images and labels.
+
+(x_test, y_test) → test images and labels.
+
+⭐ Importance / Aim Achievement
+
+Loads MNIST dataset, which is used for image classification tasks.
+
+
+✅ Part 3 — Normalizing Pixel Values
+x_train = x_train.astype("float32") / 255.0
+x_test = x_test.astype("float32") / 255.0
+
+🔍 Explanation
+
+Converts pixel values from integer format to float32 type and normalizes them 
+by dividing by 255 (scales the pixel values to the range 0-1).
+
+⭐ Importance / Aim Achievement
+
+Normalization helps the model learn efficiently and speeds up training.
+
+
+✅ Part 4 — Defining the Network Architecture Using Keras
+model = Sequential([
+    Flatten(input_shape=(28, 28)),          # Flatten 28x28 images
+    Dense(128, activation='relu'),          # Hidden layer
+    Dense(10, activation='softmax')         # Output layer (10 classes)
+])
+
+🔍 Explanation
+
+Flatten Layer: Flattens 28x28 pixel images (MNIST) into 1D vectors (28*28 = 784 features).
+
+Dense Layer: Adds a fully connected hidden layer with 128 units and ReLU activation.
+
+Dense Output Layer: Outputs 10 classes (corresponding to MNIST digits) with 
+softmax activation (probability distribution).
+
+⭐ Importance / Aim Achievement
+
+Defines a simple feedforward neural network (FNN) architecture suitable for classification on the MNIST dataset.
+
+
+✅ Part 5 — Compiling the Model Using SGD
+optimizer = SGD(learning_rate=0.01)
+model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+🔍 Explanation
+
+SGD: Defines the Stochastic Gradient Descent optimizer with a learning rate of 0.01.
+
+Loss function: sparse_categorical_crossentropy is used for multi-class classification problems.
+
+Metrics: Tracks accuracy during training.
+
+⭐ Importance / Aim Achievement
+
+Compiles the model with the chosen optimizer and loss function. 
+This is necessary before training the model.
+
+
+✅ Part 6 — Training the Model
+history = model.fit(x_train, y_train, epochs=10, batch_size=128, validation_split=0.1, verbose=1)
+
+🔍 Explanation
+
+fit(): Trains the model on training data (x_train, y_train).
+
+epochs=10: Trains the model for 10 epochs (iterations over the entire dataset).
+
+batch_size=128: Updates the model after every 128 samples.
+
+validation_split=0.1: 10% of the training data is used for validation.
+
+verbose=1: Displays training progress.
+
+⭐ Importance / Aim Achievement
+
+Trains the model and tracks progress for later evaluation and visualization.
+
+
+✅ Part 7 — Evaluating the Model
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
+print(f"\nTest Accuracy: {test_acc:.4f}")
+print(f"Test Loss: {test_loss:.4f}")
+
+🔍 Explanation
+
+evaluate(): Evaluates the model performance on the test data.
+
+test_loss gives the value of the loss function.
+
+test_acc gives the accuracy on the test set.
+
+Prints the test accuracy and loss rounded to 4 decimal places.
+
+⭐ Importance / Aim Achievement
+
+Evaluates model performance on the unseen test set 
+and prints the accuracy/loss.
+
+
+✅ Part 8 — Plotting Training Loss and Accuracy
+plt.figure(figsize=(10,4))
+
+# Plot Loss
+plt.subplot(1, 2, 1)
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Training & Validation Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+
+# Plot Accuracy
+plt.subplot(1, 2, 2)
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.title('Training & Validation Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+
+🔍 Explanation
+
+Plotting:
+
+Creates a figure of size 10x4 inches.
+
+Loss plot: Shows training and validation loss curves.
+
+Accuracy plot: Shows training and validation accuracy curves.
+
+tight_layout(): Adjusts layout so plots don't overlap.
+
+show(): Displays the plots.
+
+
+⭐ Importance / Aim Achievement
+
+Visualizes the model’s training and validation loss/accuracy curves, 
+helping in model evaluation.
+
+
+🎯 FINAL SUMMARY (SPPU Practical Format)
+
+This practical walks through the entire process of implementing a 
+Feedforward Neural Network (FNN) using Keras and TensorFlow. Key steps include:
+
+Data Loading: Using the MNIST dataset.
+
+Preprocessing: Normalizing pixel values to 0-1 range.
+
+Network Architecture: Creating a simple FNN with one hidden layer.
+
+Model Training: Using Stochastic Gradient Descent (SGD) as optimizer.
+
+Evaluation: Reporting accuracy and loss.
+
+Visualization: Plotting training loss and accuracy for model evaluation.
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+
+
+✅ Practical 3 — 
+Implementing Image Classification Using CNN Deep Learning Architecture
+Aim:
+
+To implement an Image Classification Model using CNN Deep Learning Architecture on the CIFAR-10 dataset.
+
+
+✅ Part 1 — Loading and Preprocessing the Image Data
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import matplotlib.pyplot as plt
+
+# Load CIFAR-10 dataset
+(x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
+
+# Normalize pixel values (0–255 → 0–1)
+x_train = x_train.astype("float32") / 255.0
+x_test = x_test.astype("float32") / 255.0
+
+# Display a few sample images
+plt.figure(figsize=(5,5))
+for i in range(9):
+    plt.subplot(3,3,i+1)
+    plt.imshow(x_train[i])
+    plt.title(f"Label: {y_train[i][0]}")
+    plt.axis('off')
+plt.show()
+
+🔍 Explanation
+
+Library Imports:
+
+TensorFlow and Keras are imported for building the neural network.
+
+matplotlib.pyplot is imported for displaying images.
+
+Loading CIFAR-10 Dataset:
+
+Loads the CIFAR-10 dataset, which contains 60,000 images (50,000 for training, 10,000 for testing) across 10 classes.
+
+x_train, y_train → training images and labels, x_test, y_test → testing images and labels.
+
+Normalization:
+
+Pixel values are normalized by dividing by 255, converting them to a range of 0 to 1. This helps the model learn faster.
+
+Display Sample Images:
+
+Displays 9 images from the training set, showing the corresponding labels.
+
+⭐ Importance / Aim Achievement
+
+Data Loading & Preprocessing: Loads and preprocesses the CIFAR-10 dataset.
+
+Visualization: Displays sample images to visually inspect the dataset.
+
+
+✅ Part 2 — Defining the Model’s Architecture
+model = keras.Sequential([
+    layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)),
+    layers.MaxPooling2D((2,2)),
+    layers.Conv2D(64, (3,3), activation='relu'),
+    layers.MaxPooling2D((2,2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')   # 10 output classes
+])
+
+🔍 Explanation
+
+Convolutional Layers:
+
+Conv2D: First convolution layer with 32 filters of size 3x3, ReLU activation function.
+
+Conv2D: Second convolution layer with 64 filters of size 3x3, ReLU activation function.
+
+Max Pooling:
+
+MaxPooling2D: Reduces the spatial dimensions by taking the maximum value in a 
+2x2 pool size. This helps in reducing computation and overfitting.
+
+Flattening:
+
+Flatten: Converts the 2D feature maps into a 1D vector to pass to the fully connected layers.
+
+Dense Layers:
+
+Dense(64, activation='relu'): Fully connected layer with 64 units and ReLU activation.
+
+Dense(10, activation='softmax'): Output layer with 10 units 
+(one for each class in CIFAR-10) and softmax activation to 
+output probabilities.
+
+⭐ Importance / Aim Achievement
+
+Model Architecture: Defines a CNN architecture suitable for image 
+classification using convolutional layers and dense layers.
+
+
+✅ Part 3 — Training the Model
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(x_train, y_train, epochs=5, batch_size=64,
+                    validation_split=0.1, verbose=1)
+
+🔍 Explanation
+
+Compiling the Model:
+
+optimizer='adam': Uses the Adam optimizer, which adapts the learning rate based on training progress.
+
+loss='sparse_categorical_crossentropy': Used for multi-class classification tasks.
+
+metrics=['accuracy']: Tracks accuracy as the evaluation metric during training.
+
+Training the Model:
+
+epochs=5: Trains the model for 5 epochs (iterations over the dataset).
+
+batch_size=64: Uses 64 images in each batch.
+
+validation_split=0.1: 10% of the training data is used for validation.
+
+verbose=1: Displays progress during training.
+
+⭐ Importance / Aim Achievement
+
+Model Training: Compiles the model and trains it using the CIFAR-10 dataset, tracking accuracy and loss.
+
+
+✅ Part 4 — Estimating the Model’s Performance
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
+print(f"\n Test Accuracy: {test_acc:.4f}")
+print(f" Test Loss: {test_loss:.4f}")
+
+🔍 Explanation
+
+Evaluating the Model:
+
+evaluate(): Evaluates the model's performance on the test dataset.
+
+test_loss: The loss value for the test set.
+
+test_acc: The accuracy value for the test set.
+
+Printing Results:
+
+Displays the test accuracy and test loss rounded to 4 decimal places.
+
+⭐ Importance / Aim Achievement
+
+Model Evaluation: Estimates the model's performance on the unseen test set, 
+providing key metrics such as accuracy and loss.
+
+
+✅ Part 5 — Plotting Training and Validation Accuracy/Loss
+plt.figure(figsize=(10,4))
+
+# Accuracy Plot
+plt.subplot(1,2,1)
+plt.plot(history.history['accuracy'], label='Train Acc')
+plt.plot(history.history['val_accuracy'], label='Val Acc')
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+
+# Loss Plot
+plt.subplot(1,2,2)
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Val Loss')
+plt.title('Model Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+
+🔍 Explanation
+
+Creating Plots:
+
+Accuracy Plot: Plots the training accuracy and validation accuracy for each epoch.
+
+Loss Plot: Plots the training loss and validation loss for each epoch.
+
+tight_layout(): Adjusts the layout to ensure the plots don’t overlap.
+
+show(): Displays the plots.
+
+
+⭐ Importance / Aim Achievement
+
+Visualization: Plots training and validation accuracy/loss, helping to visually 
+track the model's performance and detect overfitting or underfitting.
+
+
+🎯 FINAL SUMMARY (SPPU Practical Format)
+
+This practical demonstrates how to implement a CNN-based Image Classification 
+Model using the CIFAR-10 dataset with the following stages:
+
+Loading & Preprocessing: Loading and normalizing the dataset and visualizing 
+a few sample images.
+
+Defining the Architecture: Building a CNN model with convolutional, pooling,
+ and fully connected layers.
+
+Training the Model: Compiling the model and training it on the dataset,
+ tracking accuracy and loss.
+
+Estimating Performance: Evaluating the model on the test dataset 
+and displaying performance metrics.
+
+Visualizing Results: Plotting training and validation accuracy/loss 
+to assess model progress.
+
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+
+
+✅ Practical 4 — Autoencoder for Anomaly Detection
+Aim:
+
+To implement Autoencoder deep learning architecture for anomaly detection.
+
+
+🔷 Part 1 — Import Required Libraries
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import numpy as np
+import matplotlib.pyplot as plt
+
+🔍 Explanation
+
+import tensorflow as tf
+Imports TensorFlow framework for building neural networks.
+
+from tensorflow import keras
+Imports Keras (high-level API inside TensorFlow).
+
+from tensorflow.keras import layers
+Imports neural-network layers (Conv2D, Dense, etc.)
+
+import numpy as np
+Used for numerical operations.
+
+import matplotlib.pyplot as plt
+Used for plotting and visualizing images.
+
+⭐ Importance / Aim Achieved
+
+✔ Imports all required DL libraries → build + train + plot the autoencoder.
+
+
+🔷 Part 2 — Load and Access the Dataset (MNIST)
+(x_train, _), (x_test, _) = keras.datasets.mnist.load_data()
+
+🔍 Explanation
+
+Loads MNIST handwritten digits dataset.
+
+_ is used because labels are not needed (autoencoder learns only input reconstruction).
+
+⭐ Importance / Aim Achieved
+
+✔ Loads data required for autoencoder training.
+
+
+🔷 Part 3 — Normalize and Reshape
+x_train = x_train.astype("float32") / 255.0
+x_test = x_test.astype("float32") / 255.0
+x_train = x_train.reshape((len(x_train), 28, 28, 1))
+x_test = x_test.reshape((len(x_test), 28, 28, 1))
+
+🔍 Explanation
+
+astype("float32")
+Converts integers → 32-bit floats (good for neural networks).
+
+/ 255.0
+Normalizes pixel values from 0–255 → 0–1.
+
+reshape((len(x_train), 28, 28, 1))
+Adds channel dimension (1) because MNIST is grayscale.
+
+Meaning:
+
+len(x_train) → number of images (60000)
+
+28 → height
+
+28 → width
+
+1 → channels (grayscale)
+
+⭐ Importance / Aim Achieved
+
+✔ Prepares data in a format required for CNN-based autoencoder.
+
+
+🔷 Part 4 — Build the Autoencoder Model
+Encoder
+encoder = keras.Sequential([
+    layers.Input(shape=(28, 28, 1)),
+    layers.Conv2D(16, (3,3), activation='relu', padding='same'),
+    layers.MaxPooling2D((2,2), padding='same'),
+    layers.Conv2D(8, (3,3), activation='relu', padding='same'),
+    layers.MaxPooling2D((2,2), padding='same')
+])
+
+🔍 Explanation
+
+Input(shape=(28,28,1))
+Input is a 28×28 grayscale image.
+
+Conv2D(16, (3,3))
+
+16 filters
+
+Kernel size 3×3
+
+Extracts basic features.
+
+MaxPooling2D((2,2))
+Downsamples → halves height & width.
+
+Conv2D(8, (3,3))
+8 filters → deeper, compressed features.
+
+MaxPooling2D((2,2))
+Final downsampling → latent representation.
+
+⭐ Importance / Aim Achieved
+
+✔ Encoder compresses input → latent space representation used for anomaly detection.
+
+Decoder
+decoder = keras.Sequential([
+    layers.Conv2D(8, (3,3), activation='relu', padding='same', input_shape=(7,7,8)),
+    layers.UpSampling2D((2,2)),
+    layers.Conv2D(16, (3,3), activation='relu', padding='same'),
+    layers.UpSampling2D((2,2)),
+    layers.Conv2D(1, (3,3), activation='sigmoid', padding='same')
+])
+
+🔍 Explanation
+
+input_shape=(7,7,8)
+Shape after encoder downsampling:
+
+From 28×28 → 14×14 → 7×7
+
+With 8 filters
+
+UpSampling2D((2,2))
+Doubles height and width.
+
+Conv2D(1, ...)
+Recreates original 1-channel grayscale image.
+
+activation='sigmoid'
+Ensures pixel output ranges 0–1.
+
+⭐ Importance / Aim Achieved
+
+✔ Decoder reconstructs the original image from latent code.
+
+Combine Encoder + Decoder
+autoencoder = keras.Sequential([encoder, decoder])
+
+🔍 Explanation
+
+Entire autoencoder is just encoder feeding into decoder.
+
+⭐ Importance / Aim Achieved
+
+✔ Creates a full functional autoencoder model.
+
+
+🔷 Part 5 — Compile the Model
+autoencoder.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
+
+🔍 Explanation
+
+optimizer='adam'
+Adaptive learning algorithm → faster training.
+
+loss='mse'
+Mean Squared Error → measures reconstruction error
+High error = anomaly.
+
+metrics=['accuracy']
+Tracks reconstruction-accuracy (not used for detection).
+
+⭐ Importance / Aim Achieved
+
+✔ Defines training behavior & error measure used for anomaly detection.
+
+
+🔷 Part 6 — Train the Model
+history = autoencoder.fit(x_train, x_train,
+                          epochs=5,
+                          batch_size=128,
+                          validation_split=0.1,
+                          verbose=1)
+
+🔍 Explanation
+
+Input and output are same: x_train → x_train
+Because autoencoder learns to reconstruct input.
+
+epochs=5
+Model trains over dataset 5 times.
+
+batch_size=128
+Each training step uses 128 images.
+
+validation_split=0.1
+10% of data used for validation.
+
+verbose=1
+Shows training progress.
+
+⭐ Importance / Aim Achieved
+
+✔ Autoencoder is trained to reconstruct normal images → essential for anomaly detection.
+
+
+🔷 Part 7 — Evaluate and Visualize Reconstructions
+decoded_imgs = autoencoder.predict(x_test[:10])
+
+🔍 Explanation
+
+Predicts reconstructed images for first 10 test images.
+
+plt.figure(figsize=(10, 4))
+for i in range(10):
+    # Original
+    plt.subplot(2, 10, i + 1)
+    plt.imshow(x_test[i].reshape(28, 28), cmap="gray")
+    plt.axis("off")
+
+    # Reconstructed
+    plt.subplot(2, 10, i + 11)
+    plt.imshow(decoded_imgs[i].reshape(28, 28), cmap="gray")
+    plt.axis("off")
+
+🔍 Explanation
+
+subplot(2,10,i+1)
+Shows original images in row 1.
+
+subplot(2,10,i+11)
+Shows reconstructed images in row 2.
+
+axis("off")
+Removes axis.
+
+⭐ Importance / Aim Achieved
+
+✔ Visualization allows detecting poor reconstruction → possible anomalies.
+
+
+🔷 Part 8 — Anomaly Detection Using Reconstruction Error
+reconstructions = autoencoder.predict(x_test)
+
+
+Gets reconstructed images for entire test set.
+
+mse = np.mean(np.power(x_test - reconstructions, 2), axis=(1,2,3))
+
+🔍 Explanation
+
+Computes MSE for each image:
+
+(original − reconstructed)²
+
+
+axis=(1,2,3)
+Mean error over height, width, channel.
+
+threshold = np.mean(mse) + 2*np.std(mse)
+
+🔍 Explanation
+
+Threshold = mean error + 2 standard deviations
+Anything above this = anomaly.
+
+anomalies = mse > threshold
+print(f"Detected {np.sum(anomalies)} anomalies out of {len(x_test)} samples.")
+
+🔍 Explanation
+
+Flags anomaly if reconstruction error is too high.
+
+Prints number of anomalies detected.
+
+⭐ Importance / Aim Achieved
+
+✔ High reconstruction error → model fails → anomaly detected
+✔ Achieves objective of anomaly detection using autoencoder.
+
+🎯 FINAL SUMMARY (SPPU Format)
+
+This practical successfully:
+
+✔ Builds an Autoencoder
+
+Encoder → compresses
+Decoder → reconstructs
+
+✔ Trains the model using MSE
+
+Low MSE → normal
+High MSE → anomaly
+
+✔ Detects anomalies
+
+Using reconstruction error-based thresholding.
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+✅ Practical 5 — Continuous Bag of Words (CBOW)
+
+Aim:
+To implement the CBOW model for text recognition using context words to predict the target word.
+
+
+🔷 Part 1 — Data Preparation
+import numpy as np
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import skipgrams
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, Lambda, Dense
+from tensorflow.keras import backend as K
+
+🔍 Explanation
+
+numpy → numerical operations
+
+Tokenizer → converts words to numeric IDs
+
+skipgrams → generates context–target training pairs
+
+Sequential → linear model container
+
+Embedding → learns vector representation of words
+
+Lambda → applies custom function (mean of embeddings)
+
+K → backend operations for Lambda layer
+
+⭐ Importance / Aim Achieved
+
+✔ Loads all essential NLP + model-building tools needed for building the CBOW neural network.
+
+
+🔷 Part 2 — Sample Text
+corpus = ["the quick brown fox jumped over the lazy dog"]
+
+🔍 Explanation
+
+A small training corpus containing a single sentence.
+
+⭐ Importance
+
+✔ Defines dataset for CBOW model.
+
+
+🔷 Part 3 — Tokenize Words
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(corpus)
+word2id = tokenizer.word_index
+id2word = {v: k for k, v in word2id.items()}
+
+🔍 Explanation
+
+Tokenizer() → tool to create vocabulary
+
+fit_on_texts() → scans all words and assigns ID
+
+word_index → dictionary: {word: id}
+
+id2word → reverse mapping {id: word}
+
+⭐ Importance
+
+✔ Converts text into machine-readable numerical format.
+
+
+🔷 Part 4 — Vocabulary Size
+vocab_size = len(word2id) + 1
+print("Vocabulary:", word2id)
+
+🔍 Explanation
+
+len(word2id) → counts unique words
+
++1 → Keras uses 1-based indexing
+
+Prints dictionary of all words assigned IDs
+
+⭐ Importance
+
+✔ Vocabulary size is required to define the Embedding layer.
+
+
+🔷 Part 5 — Convert Text to Sequence of IDs
+seq = tokenizer.texts_to_sequences(corpus)[0]
+print("\nText to sequence:", seq)
+
+🔍 Explanation
+
+Converts each word → numeric ID
+
+Example:
+
+"the quick brown fox" → [1,2,3,4]
+
+⭐ Importance
+
+✔ Converts raw text to training-ready numerical sequences.
+
+
+🔷 Part 6 — Generate Training Data (Context → Target)
+window_size = 2
+pairs, labels = skipgrams(sequence=seq, vocabulary_size=vocab_size, window_size=window_size)
+
+🔍 Explanation
+
+window_size = 2 → 2 words to left and right considered as context
+
+skipgrams() creates pairs like:
+(context_word, target_word)
+
+Example:
+Context: "quick", Target: "brown"
+
+⭐ Importance
+
+✔ Creates supervised training pairs for CBOW model.
+
+
+🔷 Part 7 — Print Sample Pairs
+print("\nSample context-target pairs (first 5):")
+for i in range(5):
+    print(f"Context: {id2word[pairs[i][0]]}, Target: {id2word[pairs[i][1]]}")
+
+🔍 Explanation
+
+Converts IDs back → words
+
+Displays first 5 generated context–target pairs
+
+⭐ Importance
+
+✔ Allows verification that skipgram training data is correct.
+
+
+🔷 Part 8 — Convert to NumPy Arrays
+pairs = np.array(pairs)
+labels = np.array(labels)
+
+🔍 Explanation
+
+Pairs and labels converted to arrays → required for Keras model.
+
+⭐ Importance
+
+✔ Prepares training data for the neural network.
+
+🔷 Part 9 — Build and Train the CBOW Model
+embed_dim = 8  # Size of embedding vector
+
+🔍 Explanation
+
+embed_dim = 8 → every word will be represented as 8-dimensional vector.
+
+model = Sequential()
+model.add(Embedding(input_dim=vocab_size, output_dim=embed_dim, input_length=2))
+model.add(Lambda(lambda x: K.mean(x, axis=1)))  # CBOW averages context embeddings
+model.add(Dense(vocab_size, activation='softmax'))
+
+🔍 Explanation
+
+Embedding(...)
+Converts word IDs → dense vectors (learned during training)
+
+Lambda(K.mean(...))
+Averages two context word embeddings
+→ This is the core idea of CBOW.
+
+Dense(vocab_size, softmax)
+Predicts the target word out of all vocabulary words.
+
+⭐ Importance
+
+✔ Complete functional architecture of CBOW model.
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+print("\nTraining CBOW model...")
+model.fit(pairs, labels, epochs=200, verbose=0)
+
+🔍 Explanation
+
+adam → optimization algorithm
+
+sparse_categorical_crossentropy → used for integer-labeled targets
+
+epochs=200 → trains model for many iterations
+
+verbose=0 → hides training logs
+
+⭐ Importance
+
+✔ Trains model to predict a word from its context → CBOW achieved.
+
+
+🔷 Part 10 — Output Word Embeddings
+weights = model.get_layer('embedding').get_weights()[0]
+print("\nWord Embedding shape:", weights.shape)
+
+🔍 Explanation
+
+Extracts learned embedding matrix
+
+Shape: (vocab_size, embedding_dimension)
+
+⭐ Importance
+
+✔ Shows learned vector representation for each word.
+
+for word, idx in word2id.items():
+    print(f"{word}: {weights[idx]}")
+
+🔍 Explanation
+
+Prints the embedding vector for every word.
+
+⭐ Importance
+
+✔ Helps understand how words are mapped to numerical representations.
+
+
+🔷 Part 11 — Test Prediction
+test_context = np.array([[word2id['quick'], word2id['fox']]])
+pred = model.predict(test_context)
+predicted_word = id2word[np.argmax(pred)]
+print("\nPredicted word for context ['quick', 'fox'] →", predicted_word)
+
+🔍 Explanation
+
+Input context words: “quick”, “fox”
+
+Model predicts the most likely middle word
+
+argmax(pred) → select highest probability
+
+Convert ID → word
+
+⭐ Importance
+
+✔ Demonstrates how CBOW predicts the missing center word.
+
+🎯 FINAL SUMMARY (SPPU Format)
+This practical successfully demonstrates:
+
+CBOW architecture
+
+Word embedding generation
+
+Context → Target prediction
+
+Training using neural network
+
+Real prediction using context words
+
+Outcome:
+
+✔ Implemented CBOW
+✔ Built embeddings
+✔ Generated predictions
+✔ Evaluated model behavior
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+✅ Practical 6 — Transfer Learning for Object Detection / Classification
+
+Aim:
+Implement object detection (image classification) using transfer learning with a pretrained CNN.
+
+🔷 Part 1 — Import Required Libraries
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers, models
+import matplotlib.pyplot as plt
+
+🔍 Explanation
+
+tensorflow → deep learning framework
+
+keras → high-level API inside TensorFlow
+
+layers & models → for building neural networks
+
+matplotlib → for plotting accuracy/loss graphs
+
+⭐ Importance / Aim Achieved
+
+✔ Loads all necessary deep learning + plotting tools.
+
+
+🔷 Part 2 — Load Dataset (CIFAR-10)
+(x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
+
+🔍 Explanation
+
+Loads CIFAR-10 dataset containing 60,000 images (32×32 RGB)
+
+10 object classes such as car, dog, bird, airplane, etc.
+
+⭐ Importance
+
+✔ Provides image dataset to test transfer learning.
+
+
+🔷 Part 3 — Normalize Pixel Values
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+
+🔍 Explanation
+
+Converts pixel values to float
+
+Divides by 255 → scales values to 0–1 range
+
+Helps faster convergence during training
+
+⭐ Importance
+
+✔ Preprocessing required before feeding images into neural networks.
+
+
+🔷 Part 4 — Number of Classes
+num_classes = 10
+
+🔍 Explanation
+
+CIFAR-10 contains 10 categories, so the output layer must predict 10 classes.
+
+⭐ Importance
+
+✔ Required while building final softmax classifier.
+
+
+🔷 Part 5 — Load Pretrained CNN (MobileNetV2)
+base_model = keras.applications.MobileNetV2(
+    input_shape=(32, 32, 3),
+    include_top=False,
+    weights='imagenet'
+)
+
+🔍 Explanation
+
+MobileNetV2 → lightweight, high-performance CNN
+
+input_shape=(32,32,3) → CIFAR-10 image size
+
+include_top=False
+Removes the original classification head
+
+weights='imagenet'
+Loads pretrained weights learned on 1.2M ImageNet images
+
+⭐ Importance
+
+✔ Transfer learning extracts powerful features from a pretrained model.
+
+
+🔷 Part 6 — Freeze Pretrained Layers
+for layer in base_model.layers:
+    layer.trainable = False
+
+🔍 Explanation
+
+Locks the weights of MobileNetV2 so only the new classifier will train.
+
+⭐ Importance
+
+✔ Prevents destroying pretrained knowledge.
+✔ Reduces training time drastically.
+
+
+🔷 Part 7 — Add Custom Classifier Layers
+model = models.Sequential([
+    base_model,
+    layers.GlobalAveragePooling2D(),
+    layers.Dense(128, activation='relu'),
+    layers.Dropout(0.3),
+    layers.Dense(num_classes, activation='softmax')
+])
+
+🔍 Explanation
+
+base_model → frozen feature extractor
+
+GlobalAveragePooling2D()
+Converts 3D feature maps → 1D vector
+
+Dense(128, relu)
+Learns classification patterns
+
+Dropout(0.3)
+Reduces overfitting
+
+Dense(num_classes, softmax)
+Produces probabilities for 10 classes
+
+⭐ Importance
+
+✔ Builds trainable classification head on top of pretrained model.
+
+
+🔷 Part 8 — Compile the Model
+model.compile(
+    optimizer=keras.optimizers.Adam(learning_rate=0.001),
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+🔍 Explanation
+
+Adam → fast, adaptive optimizer
+
+lr = 0.001 → standard learning rate
+
+sparse_categorical_crossentropy
+Used when labels are integers (0–9)
+
+Tracks accuracy during training
+
+⭐ Importance
+
+✔ Sets up model for training according to classification objective.
+
+
+🔷 Part 9 — Train the Classifier Layers
+history = model.fit(
+    x_train, y_train,
+    validation_split=0.1,
+    epochs=5,
+    batch_size=64,
+    verbose=1
+)
+
+🔍 Explanation
+
+validation_split=0.1 → 10% of training images used for validation
+
+epochs=5 → trains for 5 complete passes
+
+batch_size=64 → processes 64 images at a time
+
+verbose=1 → shows training output
+
+⭐ Importance
+
+✔ Trains only the new classifier layers using extracted features.
+
+
+🔷 Part 10 — Evaluate Model Performance
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
+print(f"\n Test Accuracy: {test_acc:.4f}")
+print(f" Test Loss: {test_loss:.4f}")
+
+🔍 Explanation
+
+Runs model on unseen test images
+
+Returns accuracy and loss
+
+⭐ Importance
+
+✔ Measures generalization performance of transfer-learned model.
+
+
+🔷 Part 11 — Plot Accuracy & Loss
+plt.figure(figsize=(10,4))
+
+
+Creates 10×4 inch graph layout.
+
+📌 Accuracy Plot
+plt.subplot(1,2,1)
+plt.plot(history.history['accuracy'], label='Train Acc')
+plt.plot(history.history['val_accuracy'], label='Val Acc')
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+
+🔍 Explanation
+
+Draws training & validation accuracy curves
+
+Helps analyze overfitting or underfitting
+
+📌 Loss Plot
+plt.subplot(1,2,2)
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Val Loss')
+plt.title('Model Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+
+🔍 Explanation
+
+Shows how model loss decreases over epochs
+
+Validates training stability
+
+Final Display
+plt.tight_layout()
+plt.show()
+
+🔍 Explanation
+
+Adjusts spacing
+
+Displays both graphs neatly
+
+⭐ Importance
+
+✔ Visualisation of training progress helps understand model behaviour.
+
+🎯 FINAL SUMMARY (SPPU FORMAT)
+✔ Concepts Applied
+
+Transfer learning
+
+Feature extraction
+
+Training custom classifier
+
+Freezing & unfreezing layers
+
+Evaluation & plotting
+
+✔ Objectives Achieved
+
+Used pretrained MobileNetV2
+
+Classified CIFAR-10 objects
+
+Plotted accuracy and loss
+
+Understood transfer learning workflow
+
+
+
+
+------------------
+
+
+extra:
+
+✅ TensorFlow
+
+TensorFlow is an open-source deep learning framework used for building and deploying scalable ML models.
+
+✅ Keras
+
+Keras is a high-level neural network library that provides easy APIs and runs on top of frameworks like TensorFlow.
+
+✅ Theano
+
+Theano is a mathematical computation library that allows fast numerical computation using GPUs.
+
+✅ PyTorch
+
+PyTorch is a flexible deep learning framework known for dynamic computation graphs and research-friendly design.
+
+✅ Why TensorFlow + Keras? (One Line)
+
+TensorFlow + Keras is preferred because it combines TensorFlow’s powerful backend with Keras’s simple, 
+user-friendly API for faster model development.
+
+✅ Verbose
+
+Verbose means the level of detail printed during model training
+ (0 = silent, 1 = progress bar, 2 = one line per epoch).
+
+✅ Batch Size
+
+Batch size is the number of training samples processed before the
+ model updates its weights once.
+
+✅ Epochs
+
+Epochs represent how many times the entire training dataset is passed through the model.
+
+✅ Float32
+
+Float32 is a 32-bit floating-point numerical data type commonly used for faster
+ GPU-optimized ML computations.
+
+✅ ReLU
+
+ReLU (Rectified Linear Unit) is an activation function that 
+outputs max(0, x) to introduce non-linearity.
+
+✅ Softmax
+
+Softmax is an activation function that converts outputs into a probability
+ distribution across classes.
+
+✅ MNIST
+
+MNIST is a dataset of 70,000 handwritten digit images (0–9) used for 
+image classification tasks.
+
+✅ CIFAR-10
+
+CIFAR-10 is a dataset of 60,000 32×32 color images across 10 object classes.
